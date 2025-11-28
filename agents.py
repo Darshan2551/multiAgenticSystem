@@ -328,7 +328,7 @@ def validator_agent(question, solverA_output, solverB_output):
     
 import requests, json
 
-API_KEY = "AIzaSyDuOq31ZoWnaeTrn3e8XasCeiYCCTPZCtM"
+API_KEY = "YOUR API KEY HERE"
 
 response = requests.get(
     f"https://generativelanguage.googleapis.com/v1/models?key={API_KEY}"
@@ -394,7 +394,7 @@ def orchestrator(call_llm, max_questions=5, max_attempts=50):
 import requests
 import json
 
-API_KEY = r'AIzaSyCfOYtf76EH7JZQSo77ifTvEH8PW0aToQs'  # your correct cloud key
+API_KEY = r'YOUR API KEY HERE'  # your correct cloud key
 
 def real_llm(prompt):
     url = f"https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key={API_KEY}"
@@ -563,4 +563,5 @@ def save_accuracy_report(report, filename="accuracy_report.json"):
     with open(filename, "w") as f:
         json.dump(report, f, indent=4)
     print(f"Accuracy report saved as {filename}")
+
 
