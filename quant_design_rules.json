@@ -1,0 +1,119 @@
+{
+  "output_schema": {
+    "id": "string",
+    "category": [
+      "TSD",
+      "WorkTime",
+      "Pipes",
+      "ProfitLoss",
+      "MixturesRatio",
+      "Age",
+      "BoatsStreams",
+      "AllocationLogic"
+    ],
+    "difficulty": ["Easy", "Medium", "Hard"],
+    "question": "string",
+    "variables": "object",
+    "options": "object",
+    "correct_option": "string",
+    "hidden_solution": "string",
+    "units": "string"
+  },
+
+  "base_formulas": {
+    "TSD": {
+      "distance": "speed * time",
+      "relative_speed_towards": "v1 + v2",
+      "relative_speed_away": "v1 - v2",
+      "boat_downstream": "boat_speed + stream_speed",
+      "boat_upstream": "boat_speed - stream_speed"
+    },
+    "WorkTime": {
+      "work": "rate * time",
+      "combined_rate": "r1 + r2",
+      "fraction_done": "(rate * time) / total_work"
+    },
+    "Pipes": {
+      "fill_rate": "1 / fill_time",
+      "net_rate": "sum(fill_rates) - leak_rate"
+    },
+    "ProfitLoss": {
+      "profit_percent": "(SP - CP) / CP * 100",
+      "successive_discounts": "final_price = MP * (1 - d1) * (1 - d2)"
+    },
+    "MixturesRatio": {
+      "replacement_formula": "remaining = initial * ((V - r) / V)^n",
+      "ratio_split": "share = total * (ratio_part / sum_ratio)"
+    },
+    "Age": {
+      "age_relation_past": "A - x : B - x",
+      "age_relation_future": "A + x : B + x"
+    }
+  },
+
+  "templates": {
+    "TSD": [
+      "Two vehicles start X km apart, speeds vA and vB. Find meeting time.",
+      "A boat travels downstream and upstream at different speeds. Find still-water speed."
+    ],
+    "WorkTime": [
+      "A and B work together for D days. Then one leaves. Find remaining time.",
+      "A alone works for X days, B finishes. Find X."
+    ],
+    "Pipes": [
+      "Two pipes fill tank, one closes after H hours. Find total time.",
+      "Tank fills with leak. Find leak time."
+    ],
+    "ProfitLoss": [
+      "CP given, profit %, discount %. Find MP.",
+      "Item marked M, two discounts. Find final selling price."
+    ],
+    "MixturesRatio": [
+      "Container V, remove r liters and replace with water n times. Find final concentration.",
+      "Money shared in ratio a:b:c. Find B’s share."
+    ],
+    "Age": [
+      "Father-son ratio now and past. Find present age.",
+      "Age relation 10 years ago and 10 years later. Find present age."
+    ]
+  },
+
+  "constraints": {
+    "general": [
+      "No negative time or distance",
+      "Speeds must be realistic (1–200 km/h)",
+      "Age > 0 always",
+      "No division by zero",
+      "Avoid extremely large or tiny decimals"
+    ],
+    "MCQ": [
+      "Exactly 4 options",
+      "One correct option only",
+      "Plausible distractors required",
+      "Values must be unique"
+    ]
+  },
+
+  "hallucination_checks": {
+    "must_not_contain": [
+      "invented constants not in story",
+      "unit mismatch",
+      "wrong formula substitution",
+      "duplicate MCQ options"
+    ]
+  },
+
+  "validation_rules": [
+    "SolverA_answer == SolverB_answer",
+    "Generator answer matches MCQ correct_option",
+    "No impossible scenario",
+    "No unused numeric values",
+    "Hidden solution consistent with solver reasoning"
+  ],
+
+  "difficulty_rules": {
+    "Easy": "1-step direct formula",
+    "Medium": "2-step reasoning with combined operations",
+    "Hard": "multi-step, repeated operations or simultaneous equations"
+  }
+}
